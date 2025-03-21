@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yeshwanth S A - Product Analyst Portfolio</title>
     <meta name="description" content="Product Analyst based in Bengaluru, specializing in data-driven insights and product analytics.">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="./css/styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Dark Theme Base Styles */
@@ -1316,8 +1316,17 @@
             <h2 class="section-title">Get in Touch</h2>
             <div class="section-divider"></div>
             <form action="https://formsubmit.co/yeshusa13@gmail.com" method="POST" class="contact-form">
-                <input type="hidden" name="_next" value="thank-you.html">
+                <!-- Honeypot -->
+                <input type="text" name="_honey" style="display: none;">
+                
+                <!-- Disable captcha -->
                 <input type="hidden" name="_captcha" value="false">
+                
+                <!-- Specify redirect -->
+                <input type="hidden" name="_next" value="https://yeshwanthsa18.github.io/yeshwanthgithub.io/thank-you.html">
+                
+                <!-- Template -->
+                <input type="hidden" name="_template" value="box">
                 
                 <div class="form-group">
                     <input type="text" name="name" placeholder="Your Name" required>
@@ -1337,11 +1346,14 @@
                     <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
                 </div>
                 
-                <button type="submit">Send Message</button>
+                <button type="submit" class="submit-button">
+                    <span class="button-text">Send Message</span>
+                    <span class="button-loader" style="display: none;">Sending...</span>
+                </button>
             </form>
         </div>
     </section>
 
-    <script src="js/main.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 </html> 
