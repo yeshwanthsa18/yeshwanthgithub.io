@@ -12,6 +12,29 @@ body {
             rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Section Styles */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #60a5fa, #9333ea);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.section-divider {
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #60a5fa, #9333ea);
+    margin: 0 auto 3rem;
+    border-radius: 2px;
 }
 
 /* Star Animation Styles */
@@ -35,24 +58,6 @@ body {
     opacity: 0;
 }
 
-.interactive-star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    pointer-events: none;
-}
-
-.interactive-star.glow {
-    transform: scale(2);
-    box-shadow: 
-        0 0 10px #fff,
-        0 0 20px #60a5fa,
-        0 0 30px #9333ea;
-}
-
 .cursor-trail {
     position: fixed;
     width: 100%;
@@ -70,10 +75,27 @@ body {
     transition: transform 0.15s ease-out;
 }
 
+.cursor-star.large {
+    transform: scale(2);
+    box-shadow: 
+        0 0 10px #fff,
+        0 0 20px #60a5fa,
+        0 0 30px #9333ea;
+}
+
 /* Hero Section Styles */
-.hero-content {
-    text-align: center;
+#home {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     padding: 2rem;
+    text-align: center;
+}
+
+.hero-content {
     position: relative;
     z-index: 1;
 }
@@ -86,6 +108,7 @@ body {
     background-clip: text;
     color: transparent;
     margin-bottom: 1rem;
+    animation: fadeInUp 1s ease-out;
 }
 
 /* Contact Form Styles */
@@ -98,15 +121,6 @@ body {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
-}
-
-#contact .section-title {
-    text-align: center;
-    margin-bottom: 0.5rem;
-}
-
-#contact .section-divider {
-    margin-bottom: 3rem;
 }
 
 .form-group {
@@ -131,15 +145,7 @@ input:focus, textarea:focus {
     background: rgba(15, 23, 42, 0.8);
 }
 
-input[type="tel"] {
-    letter-spacing: 1px;
-}
-
-input[type="tel"]::placeholder {
-    letter-spacing: normal;
-}
-
-button[type="submit"] {
+.submit-button {
     width: 100%;
     padding: 1rem;
     background: linear-gradient(to right, #60a5fa, #9333ea);
@@ -149,11 +155,20 @@ button[type="submit"] {
     border-radius: 0.75rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-button[type="submit"]:hover {
+.submit-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 20px -10px rgba(96, 165, 250, 0.5);
+}
+
+.button-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Animations */
@@ -161,6 +176,17 @@ button[type="submit"]:hover {
     0% { opacity: 0; transform: translateY(0); }
     50% { opacity: 1; }
     100% { opacity: 0; transform: translateY(100vh); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Responsive Design */
@@ -172,6 +198,21 @@ button[type="submit"]:hover {
     .contact-form {
         margin: 1rem;
     }
+}
+
+/* Loading Animation */
+.button-loader {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
 /* About Section Styles */
