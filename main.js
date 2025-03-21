@@ -1,6 +1,8 @@
 // Star animation script
 function createStars() {
     const starsContainer = document.getElementById('stars');
+    if (!starsContainer) return;
+
     const numberOfStars = 100;
     
     for (let i = 0; i < numberOfStars; i++) {
@@ -26,6 +28,8 @@ function createStars() {
 function createCursorTrail() {
     const cursorTrail = document.getElementById('cursorTrail');
     const heroSection = document.getElementById('home');
+    if (!cursorTrail || !heroSection) return;
+
     const maxStars = 20;
     const stars = [];
     let mouseX = 0;
@@ -68,65 +72,26 @@ function createCursorTrail() {
     updateStars();
 }
 
-// Form validation
-function validateForm(event) {
-    event.preventDefault();
-    
-    const form = event.target;
-    const name = form.querySelector('input[name="name"]');
-    const email = form.querySelector('input[name="email"]');
-    const message = form.querySelector('textarea[name="message"]');
-    
-    let isValid = true;
-    
-    // Reset previous error states
-    clearErrors();
-    
-    // Validate name
-    if (!name.value.trim() || name.value.length < 2) {
-        showError(name, 'Name must be at least 2 characters');
-        isValid = false;
-    }
-    
-    // Validate email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email.value)) {
-        showError(email, 'Please enter a valid email address');
-        isValid = false;
-    }
-    
-    // Validate message
-    if (!message.value.trim() || message.value.length < 10) {
-        showError(message, 'Message must be at least 10 characters');
-        isValid = false;
-    }
-    
-    if (isValid) {
-        form.submit();
-    }
-}
+// Form handling
+function setupForm() {
+    const form = document.querySelector('.contact-form');
+    if (!form) return;
 
-function showError(element, message) {
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'error-message';
-    errorDiv.textContent = message;
-    element.parentNode.appendChild(errorDiv);
-    element.classList.add('error');
-}
+    form.addEventListener('submit', function(e) {
+        const button = form.querySelector('.submit-button');
+        const buttonText = button.querySelector('.button-text');
+        const buttonLoader = button.querySelector('.button-loader');
 
-function clearErrors() {
-    document.querySelectorAll('.error-message').forEach(el => el.remove());
-    document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+        // Show loading state
+        buttonText.style.display = 'none';
+        buttonLoader.style.display = 'block';
+        button.disabled = true;
+    });
 }
 
 // Initialize everything when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     createStars();
     createCursorTrail();
-    
-    // Add form validation
-    const form = document.querySelector('form');
-    if (form) {
-        form.addEventListener('submit', validateForm);
-    }
+    setupForm();
 }); 
